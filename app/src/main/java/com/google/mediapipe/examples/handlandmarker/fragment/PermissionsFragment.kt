@@ -67,7 +67,7 @@ class PermissionsFragment : Fragment() {
             }
         }
     }
-
+//通过导航控制器将应用程序的当前界面导航到相机界面
     private fun navigateToCamera() {
         lifecycleScope.launchWhenStarted {
             Navigation.findNavController(
@@ -78,7 +78,7 @@ class PermissionsFragment : Fragment() {
             )
         }
     }
-
+    //检查应用程序所需的所有权限是否已被授予
     companion object {
 
         /** Convenience method used to check if all permissions required by this app are granted */

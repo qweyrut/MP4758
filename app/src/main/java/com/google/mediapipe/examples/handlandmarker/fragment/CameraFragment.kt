@@ -32,10 +32,8 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.google.mediapipe.examples.handlandmarker.HandLandmarkerHelper
-import com.google.mediapipe.examples.handlandmarker.MainViewModel
 import com.google.mediapipe.examples.handlandmarker.R
 import com.google.mediapipe.examples.handlandmarker.databinding.FragmentCameraBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
@@ -55,7 +53,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
         get() = _fragmentCameraBinding!!
 
     private lateinit var handLandmarkerHelper: HandLandmarkerHelper
-    private val viewModel: MainViewModel by activityViewModels()
+//    private val viewModel: MainViewModel by activityViewModels()
     private var preview: Preview? = null
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null

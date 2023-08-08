@@ -18,7 +18,6 @@ package com.google.mediapipe.examples.handlandmarker
 import android.content.res.AssetManager
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -32,7 +31,7 @@ import java.util.Arrays
 
 class MainActivity : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
-    private val viewModel : MainViewModel by viewModels()
+//    private val viewModel : MainViewModel by viewModels()
     fun doSomething(): AssetManager? {
         val assetManager = applicationContext.assets
          return assetManager
@@ -93,23 +92,6 @@ class MainActivity : AppCompatActivity() {
         val classes = arrayOf("爱国", "敬业", "诚信","友善")
         Log.e("TestMessage", "initC: " + inputArrayString)
         Log.e("TestMessage", "initA: " +classes[maxPos] )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     override fun onBackPressed() {

@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
  *  This ViewModel is used to store hand landmarker helper settings
  */
 //用于管理手势检测的相关配置信息，提供了相应的设置方法和获取方法。它可以与UI组件（如Activity或Fragment）关联，并用于处理和存储手势检测的配置参数。
+//一般用不到
 class MainViewModel : ViewModel() {
 
     private var _delegate: Int = HandLandmarkerHelper.DELEGATE_CPU
