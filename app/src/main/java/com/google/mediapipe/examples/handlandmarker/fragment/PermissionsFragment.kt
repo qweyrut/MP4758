@@ -50,7 +50,7 @@ class PermissionsFragment : Fragment() {
                 ).show()
             }
         }
-
+//这段代码的作用是在应用程序启动时检查是否授予了相机权限。如果已经授予了相机权限，将导航到相机界面；如果没有授予相机权限，将请求相机权限。
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         when (PackageManager.PERMISSION_GRANTED) {

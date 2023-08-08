@@ -19,6 +19,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.os.Parcel
+import android.os.Parcelable
 import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.VisibleForTesting
@@ -30,7 +32,24 @@ import com.google.mediapipe.tasks.core.Delegate
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
-
+/*主要思路：
+* 将HandLandmarkHelper实列话后，将传入的参数给setupHandLandmarker() 这个方法和 fun detectLiveStream(
+        imageProxy: ImageProxy,
+        isFrontCamera: Boolean
+    )这个方法，实现手部坐标侦察，但不能显示坐标点，需要通过OverlayView类的draw(canvas: Canvas)这个方法来显示坐标点，
+    * 这个MainViewModel 类应该用不到，我没用这个类也可以显示出坐标，以及list表
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+* */
+@SuppressLint("ParcelCreator")
 class HandLandmarkerHelper(
     var minHandDetectionConfidence: Float = DEFAULT_HAND_DETECTION_CONFIDENCE,
     var minHandTrackingConfidence: Float = DEFAULT_HAND_TRACKING_CONFIDENCE,
@@ -41,11 +60,13 @@ class HandLandmarkerHelper(
     val context: Context,
     // this listener is only used when running in RunningMode.LIVE_STREAM
     val handLandmarkerHelperListener: LandmarkerListener? = null
-) {
+) : Parcelable {
 
     // For this example this needs to be a var so it can be reset on changes.
     // If the Hand Landmarker will not change, a lazy val would be preferable.
     private var handLandmarker: HandLandmarker? = null
+
+
 
     init {
         setupHandLandmarker()
@@ -254,4 +275,17 @@ class HandLandmarkerHelper(
         fun onError(error: String, errorCode: Int = OTHER_ERROR)
         fun onResults(resultBundle: ResultBundle)
     }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeFloat(minHandDetectionConfidence)
+        parcel.writeFloat(minHandTrackingConfidence)
+        parcel.writeFloat(minHandPresenceConfidence)
+        parcel.writeInt(maxNumHands)
+        parcel.writeInt(currentDelegate)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
 }

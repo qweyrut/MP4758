@@ -40,7 +40,9 @@ import com.google.mediapipe.tasks.vision.core.RunningMode
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-
+/*onResume()这个方法和onDestroyView()，onViewCreated(view: View, savedInstanceState: Bundle?)是最主要的，
+* onViewCreated(view: View, savedInstanceState: Bundle?)这个方法new了一个HandLandmarkerHelper对象并传入了参数
+* */
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
 
     companion object {
@@ -150,7 +152,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
         // Attach listeners to UI control widgets
 //        initBottomSheetControls()
     }
-//该方法通过异步方式获取相机提供者的实例，并在初始化完成后绑定相机用例。
+//该方法通过异步方式获取相机提供者的实例，并在初始化完成后绑定相机用例。，这个方法会传入到onViewCreated(view: View, savedInstanceState: Bundle?)中
     // Initialize CameraX, and prepare to bind the camera use cases
     private fun setUpCamera() {
         val cameraProviderFuture =
@@ -168,7 +170,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
 
     // Declare and bind preview, capture and analysis use cases
     @SuppressLint("UnsafeOptInUsageError")
-    //用于绑定相机使用案例
+    //用于绑定相机使用案例，这个方法会传入到setUpCamera()中
     private fun bindCameraUseCases() {
 
         // CameraProvider
@@ -217,7 +219,10 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
             Log.e(TAG, "Use case binding failed", exc)
         }
     }
-//用于调用handLandmarkerHelper的方法对图像进行实时手势检测，传递相应的参数。
+//用于调用handLandmarkerHelper的方法对图像进行实时手势检测，传递相应的参数。这个方法调用了detectLiveStream(
+//            imageProxy = imageProxy,
+//            isFrontCamera = cameraFacing == CameraSelector.LENS_FACING_FRONT
+//        )这个方法
     private fun detectHand(imageProxy: ImageProxy) {
         handLandmarkerHelper.detectLiveStream(
             imageProxy = imageProxy,
